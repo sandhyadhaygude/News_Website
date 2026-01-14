@@ -1,19 +1,24 @@
 const Card = ({ data }) => {
   if (!data) {
-    return <p style={{ textAlign: "center" }}>Loading News...</p>;
+    return <p className="loading">Loading News...</p>;
   }
+
   const readMore = (url) => {
-    window.open(url);
+    window.open(url, "_blank");
   };
+
   return (
     <div className="cardContainer">
       {data.map((curItem, index) => (
         <div className="card" key={index}>
-          <img src={curItem.urlToImage} alt="News" />
+          <img
+            src={curItem.urlToImage || "https://via.placeholder.com/300"}
+            alt="News"
+          />
           <div className="content">
-            <a className="title" onClick={() => readMore(curItem.url)}>
+            <h3 className="title" onClick={() => readMore(curItem.url)}>
               {curItem.title}
-            </a>
+            </h3>
             <p>{curItem.description}</p>
             <button onClick={() => readMore(curItem.url)}>Read More</button>
           </div>
